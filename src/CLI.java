@@ -19,22 +19,21 @@ public class CLI {
                     var records = Records.viewRecords();
                     if (!records.isEmpty()) {
                         for (Customer customer : records) {
+                            System.out.println();
                             System.out.printf(
                                     """
-
-                                            Name: %s
-                                            Number: %s
-                                            Usage: %.1f
-                                            Total: %.2f
-                                            """,
+                                    Name: %s
+                                    Number: %s
+                                    Usage: %.1f
+                                    Total: %.2f
+                                    """,
                                     customer.name, customer.phoneNumber,
                                     customer.usage, customer.total);
                         }
                     } else {
                         System.out.println("There are no records yet");
                     }
-                }
-                    break;
+                } break;
                 case "search": {
                     String number = getUserInput("phone number");
                     try {
@@ -43,8 +42,7 @@ public class CLI {
                     } catch (RecordNotFound e) {
                         System.out.println(e.getMessage());
                     }
-                }
-                    break;
+                } break;
                 case "view payments": {
                     String number = getUserInput("phone number");
                     try {
@@ -53,12 +51,10 @@ public class CLI {
                     } catch (RecordNotFound e) {
                         System.out.println(e.getMessage());
                     }
-                }
-                    break;
-                case "view": {
+                } break;
+                case "view":
                     System.out.println("Command not found");
                     System.out.println("Did you mean \"view records\" or \"view payments\"?");
-                }
                     break;
                 case "add": {
                     String name = getUserInput("name");
@@ -72,8 +68,7 @@ public class CLI {
                         break;
                     }
                     System.out.println("Record has been added");
-                }
-                    break;
+                } break;
                 case "modify": {
                     String number = getUserInput("phone number");
                     float minutes = Float.parseFloat(
@@ -85,8 +80,7 @@ public class CLI {
                         break;
                     }
                     System.out.println("Record has been modified");
-                }
-                    break;
+                } break;
                 case "delete": {
                     String number = getUserInput("phone number");
                     try {
@@ -95,8 +89,7 @@ public class CLI {
                         System.out.println(e.getMessage());
                     }
                     System.out.println("Record has been deleted");
-                }
-                    break;
+                } break;
                 case "exit":
                     System.out.println("Goodbye, officer!");
                     return;
