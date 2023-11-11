@@ -1,15 +1,15 @@
 public class Customer {
-    private String name, phone_number;
-    private double usage, total_bill;
+    public String name, phoneNumber;
+    public float usage, total;
 
-    public Customer(String name, String phone_number, double usage) {
+    public Customer(String name, String phoneNumber, float usage) {
         this.name = name;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
         this.usage = usage;
-        this.total_bill = calculateBill();
+        this.total = calculateBill();
     }
 
-    private double calculateBill() {
-        return 69.9;
+    private float calculateBill() {
+        return this.usage * 0.05f;
     }
 }
