@@ -5,6 +5,7 @@ import TelecomExceptions.RecordNotFound;
 
 public class CLI {
     private static final Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
 
         System.out.println("\nWelcome, officer!");
@@ -21,8 +22,7 @@ public class CLI {
                     String number = getUserInput("phone number");
                     try {
                         System.out.println(
-                                Records.searchRecord(number)
-                        );
+                                Records.searchRecord(number));
                     } catch (RecordNotFound e) {
                         System.out.printf(e.getMessage());
                     }
@@ -33,8 +33,7 @@ public class CLI {
                     String number = getUserInput("phone number");
                     try {
                         System.out.println(
-                                Records.viewPayments(number)
-                        );
+                                Records.viewPayments(number));
                     } catch (RecordNotFound e) {
                         System.out.printf(e.getMessage());
                     }
@@ -44,8 +43,7 @@ public class CLI {
                     String name = getUserInput("name");
                     String number = getUserInput("phone number");
                     float minutes = Float.parseFloat(
-                            getUserInput("number of minutes used")
-                    );
+                            getUserInput("number of minutes used"));
                     try {
                         Records.addRecord(name, number, minutes);
                     } catch (RecordAlreadyExists e) {
@@ -56,8 +54,7 @@ public class CLI {
                 case "modify": {
                     String number = getUserInput("phone number");
                     float minutes = Float.parseFloat(
-                            getUserInput("number of minutes used")
-                    );
+                            getUserInput("number of minutes used"));
                     try {
                         Records.modifyRecord(number, minutes);
                     } catch (RecordNotFound e) {
@@ -84,6 +81,7 @@ public class CLI {
             }
         }
     }
+
     private static final String[] Ops = {
             "view records",
             "search",
@@ -93,14 +91,16 @@ public class CLI {
             "delete",
             "exit"
     };
+
     private static void displayMenu() {
         System.out.printf("TELEx CLI v%s\n", Main.version);
         System.out.printf("Logged in as: %s\n", Main.user);
         System.out.println("Available commands:");
-        for (String op: Ops) {
+        for (String op : Ops) {
             System.out.println(op);
         }
     }
+
     private static String getUserInput(String name) {
         System.out.printf("Provide the %s: ", name);
         String number = scanner.nextLine();

@@ -10,16 +10,20 @@ public class Records {
     public static ArrayList<Customer> viewRecords() {
         return List;
     }
+
     public static Customer searchRecord(String phoneNumber) {
         for (Customer customer : List) {
-            if (customer.phoneNumber.equals(phoneNumber)) return customer;
+            if (customer.phoneNumber.equals(phoneNumber))
+                return customer;
         }
         throw new RecordNotFound(phoneNumber);
     }
+
     public static float viewPayments(String phoneNumber) {
         Customer customer = searchRecord(phoneNumber);
         return customer.total;
     }
+
     /* Modify stuff */
     public static void addRecord(String name, String phoneNumber, float minutes) {
         try {
@@ -30,10 +34,12 @@ public class Records {
         }
         throw new RecordAlreadyExists(phoneNumber);
     }
+
     public static void modifyRecord(String phoneNumber, float usage) {
         Customer customer = searchRecord(phoneNumber);
         customer.usage = usage;
     }
+
     public static void deleteRecord(String phoneNumber) {
         Customer customer = searchRecord(phoneNumber);
         List.remove(customer);
