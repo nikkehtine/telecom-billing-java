@@ -15,6 +15,7 @@ public class CLI {
             System.out.print("\nWhat would you like to do? ");
             String input = scanner.nextLine();
             switch (input.toLowerCase()) {
+
                 case "view records": {
                     var records = Records.viewRecords();
                     if (!records.isEmpty()) {
@@ -23,6 +24,7 @@ public class CLI {
                         System.out.println("There are no records yet");
                     }
                 } break;
+
                 case "search": {
                     String number = getUserInput("phone number");
                     try {
@@ -31,6 +33,7 @@ public class CLI {
                         System.out.println(e.getMessage());
                     }
                 } break;
+
                 case "view payments": {
                     String number = getUserInput("phone number");
                     try {
@@ -39,10 +42,12 @@ public class CLI {
                         System.out.println(e.getMessage());
                     }
                 } break;
+
                 case "view":
                     System.out.println("Command not found");
                     System.out.println("Did you mean \"view records\" or \"view payments\"?");
                     break;
+
                 case "add": {
                     String name = getUserInput("name");
                     String number = getUserInput("phone number");
@@ -50,39 +55,44 @@ public class CLI {
                             getUserInput("number of minutes used"));
                     try {
                         Records.addRecord(name, number, minutes);
+                        System.out.println("Record has been added");
                     } catch (RecordAlreadyExists e) {
                         System.out.println(e.getMessage());
                         break;
                     }
-                    System.out.println("Record has been added");
                 } break;
+
                 case "modify": {
                     String number = getUserInput("phone number");
                     float minutes = Float.parseFloat(
                             getUserInput("number of minutes used"));
                     try {
                         Records.modifyRecord(number, minutes);
+                        System.out.println("Record has been modified");
                     } catch (RecordNotFound e) {
                         System.out.println(e.getMessage());
                         break;
                     }
-                    System.out.println("Record has been modified");
                 } break;
+
                 case "delete": {
                     String number = getUserInput("phone number");
                     try {
                         Records.deleteRecord(number);
+                        System.out.println("Record has been deleted");
                     } catch (RecordNotFound e) {
                         System.out.println(e.getMessage());
                     }
-                    System.out.println("Record has been deleted");
                 } break;
+
                 case "exit":
                     System.out.println("Goodbye, officer!");
                     return;
+
                 case "help":
                     displayMenu();
                     break;
+
                 default:
                     System.out.println("Command not found");
                     System.out.println("Type \"help\" for a list of available commands");
@@ -124,8 +134,8 @@ public class CLI {
                 Number: %s
                 Usage: %.1f
                 Total: $%.2f
-                """,
-                customer.name, customer.phoneNumber,
-                customer.usage, customer.total);
+            """,
+            customer.name, customer.phoneNumber,
+            customer.usage, customer.total);
     }
 }
