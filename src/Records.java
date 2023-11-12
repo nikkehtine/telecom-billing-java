@@ -37,7 +37,7 @@ public class Records {
 
     public static void modifyRecord(String phoneNumber, float usage) {
         Customer customer = searchRecord(phoneNumber);
-        customer.usage = usage;
+        customer.setUsage(usage);
     }
 
     public static void deleteRecord(String phoneNumber) {

@@ -5,6 +5,10 @@ public class Customer {
     public Customer(String name, String phoneNumber, float usage) {
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.setUsage(usage);
+    }
+
+    public void setUsage(float usage) {
         this.usage = usage;
         this.total = calculateBill();
     }
