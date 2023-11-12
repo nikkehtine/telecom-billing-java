@@ -26,18 +26,18 @@ public class CLI {
                 } break;
 
                 case "search": {
-                    String number = getUserInput("phone number");
+                    String phoneNumber = getUserInput("phone number");
                     try {
-                        printCustomer(Records.searchRecord(number));
+                        printCustomer(Records.searchRecord(phoneNumber));
                     } catch (RecordNotFound e) {
                         System.out.println(e.getMessage());
                     }
                 } break;
 
                 case "view payments": {
-                    String number = getUserInput("phone number");
+                    String phoneNumber = getUserInput("phone number");
                     try {
-                        System.out.printf("Total: $%.2f\n", Records.viewPayments(number));
+                        System.out.printf("Total bill: $%.2f\n", Records.viewPayments(phoneNumber));
                     } catch (RecordNotFound e) {
                         System.out.println(e.getMessage());
                     }
@@ -50,15 +50,14 @@ public class CLI {
 
                 case "add": {
                     String name = getUserInput("name");
-                    String number = getUserInput("phone number");
-                    float minutes = Float.parseFloat(
+                    String phoneNumber = getUserInput("phone number");
+                    float minutesUsed = Float.parseFloat(
                             getUserInput("number of minutes used"));
                     try {
-                        Records.addRecord(name, number, minutes);
+                        Records.addRecord(name, phoneNumber, minutesUsed);
                         System.out.println("Record has been added");
                     } catch (RecordAlreadyExists e) {
                         System.out.println(e.getMessage());
-                        break;
                     }
                 } break;
 
@@ -71,7 +70,6 @@ public class CLI {
                         System.out.println("Record has been modified");
                     } catch (RecordNotFound e) {
                         System.out.println(e.getMessage());
-                        break;
                     }
                 } break;
 
@@ -113,16 +111,16 @@ public class CLI {
 
     private static void displayMenu() {
         System.out.println();
-        System.out.printf("TELEx CLI v%s\n", Main.version);
+        System.out.printf("TelEX CLI v%s\n", Main.version);
         System.out.printf("Logged in as: %s\n", Main.user);
+        System.out.println();
+
         System.out.println("Available commands:");
-        for (String op : Ops) {
-            System.out.println(op);
-        }
+        for (String op : Ops) System.out.println(op);
     }
 
-    private static String getUserInput(String name) {
-        System.out.printf("Provide the %s: ", name);
+    private static String getUserInput(String prompt) {
+        System.out.printf("Provide the %s: ", prompt);
         return scanner.nextLine();
     }
 
@@ -131,10 +129,10 @@ public class CLI {
         System.out.printf(
             """
                 Name: %s
-                Number: %s
-                Usage: %.1f
-                Total: $%.2f
-            """,
+                Phone number: %s
+                Usage (in minutes): %.1f
+                Total bill: $%.2f
+                """,
             customer.name, customer.phoneNumber,
             customer.usage, customer.total);
     }
