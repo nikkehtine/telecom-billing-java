@@ -18,18 +18,7 @@ public class CLI {
                 case "view records": {
                     var records = Records.viewRecords();
                     if (!records.isEmpty()) {
-                        for (Customer customer : records) {
-                            System.out.println();
-                            System.out.printf(
-                                    """
-                                    Name: %s
-                                    Number: %s
-                                    Usage: %.1f
-                                    Total: %.2f
-                                    """,
-                                    customer.name, customer.phoneNumber,
-                                    customer.usage, customer.total);
-                        }
+                        for (Customer customer : records) printCustomer(customer);
                     } else {
                         System.out.println("There are no records yet");
                     }
@@ -37,8 +26,7 @@ public class CLI {
                 case "search": {
                     String number = getUserInput("phone number");
                     try {
-                        System.out.println(
-                                Records.searchRecord(number));
+                        printCustomer(Records.searchRecord(number));
                     } catch (RecordNotFound e) {
                         System.out.println(e.getMessage());
                     }
@@ -46,8 +34,7 @@ public class CLI {
                 case "view payments": {
                     String number = getUserInput("phone number");
                     try {
-                        System.out.println(
-                                Records.viewPayments(number));
+                        System.out.printf("Total: $%.2f\n", Records.viewPayments(number));
                     } catch (RecordNotFound e) {
                         System.out.println(e.getMessage());
                     }
@@ -127,5 +114,18 @@ public class CLI {
     private static String getUserInput(String name) {
         System.out.printf("Provide the %s: ", name);
         return scanner.nextLine();
+    }
+
+    private static void printCustomer(Customer customer) {
+        System.out.println();
+        System.out.printf(
+            """
+                Name: %s
+                Number: %s
+                Usage: %.1f
+                Total: $%.2f
+                """,
+                customer.name, customer.phoneNumber,
+                customer.usage, customer.total);
     }
 }
